@@ -9,4 +9,4 @@ const connectMongoDB = async () => {
     }
 }
 
-export default connectMongoDB;
+export { connectMongoDB };

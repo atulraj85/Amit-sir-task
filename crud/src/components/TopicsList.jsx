@@ -13,7 +13,7 @@ const TopicsList = () => {
   useEffect(() => {
     const fetchTopics = async () => {
       try {
-        let url = "http://localhost:3000/api/topics";
+        let url = "http://localhost:3000/api/topics/search";
         // Append query parameters based on selected sorting option and search term
         let queryParams = [];
         if (sortBy !== 'default') {
@@ -25,6 +25,11 @@ const TopicsList = () => {
         if (queryParams.length > 0) {
           url += `?${queryParams.join('&')}`;
         }
+
+
+        console.log(url)
+
+
 
         const res = await fetch(url, {
           cache: "no-store",
@@ -49,6 +54,7 @@ const TopicsList = () => {
   };
 
   const handleSearchChange = (event) => {
+    console.log(event.target.value)
     setSearchTerm(event.target.value);
   };
 

@@ -14,35 +14,14 @@ export async function POST(request) {
 }
 
 // // GET Request
-// export async function GET() {
-//     await connectMongoDB();
-//     const topics = await Topic.find();
-//     // const topics = await Topic.find().sort({title:1});
-//     // const topics = await Topic.find().sort({ createdAt: -1 });
-//     return NextResponse.json({topics});
-// }
+export async function GET() {
+    await connectMongoDB();
+    const topics = await Topic.find();
+    return NextResponse.json({topics});
+}
 
 // GET Request
-export async function GET(request) {
-    await connectMongoDB();
-    const { search } = request.nextUrl.searchParams; // Extract search query parameter
-    let topics;
 
-    if (search) {
-        // If search parameter is provided, filter topics based on title or description
-        topics = await Topic.find({
-            $or: [
-                { title: { $regex: search, $options: 'i' } }, // Case-insensitive search for title
-                { description: { $regex: search, $options: 'i' } }, // Case-insensitive search for description
-            ]
-        });
-    } else {
-        // If no search parameter provided, fetch all topics
-        topics = await Topic.find();
-    }
-
-    return NextResponse.json({ topics });
-}
 
 // DELETE Request
 export async function DELETE(request) {
